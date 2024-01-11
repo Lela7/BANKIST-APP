@@ -139,10 +139,11 @@ btnLogin.addEventListener('click', function (e) {
   );
   console.log(currentAccount);
   //to check if the pin is correct
-  if (currentAccount.pin === Number(inputLoginPin.value)) {
+  //using optional chaining for checking if the currentAccount exists (?)
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
     console.log('LOGIN'); //just for checking
   }
-});
+}); //Now there are no errors if we type the username that does not exist
 
 /////////////////////////
 /////////////////////////////////////////////////
