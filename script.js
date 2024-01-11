@@ -81,7 +81,6 @@ const displayMovements = function (movements) {
     //we use 'beforeend' when we want inverted elements
   });
 };
-displayMovements(account1.movements);
 
 //Calculating balance:
 const calcDisplayBalance = function (movements) {
@@ -89,7 +88,6 @@ const calcDisplayBalance = function (movements) {
   //to print value on screen:
   labelBalance.textContent = `${balance} €`;
 };
-calcDisplayBalance(account1.movements);
 
 //Calculating incomes and outcomes:
 const calcDisplaySummary = function (movements) {
@@ -115,7 +113,7 @@ const calcDisplaySummary = function (movements) {
     .reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `${interest}`;
 };
-calcDisplaySummary(account1.movements);
+
 //Making usernames:
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
@@ -149,10 +147,11 @@ btnLogin.addEventListener('click', function (e) {
     //to display UI we have to set opacity to 0 in our CSS file,then to change it here to 100;
     containerApp.style.opacity = 100;
     //Display movements
-
+    displayMovements(currentAccount.movements);
     //Dipslay balance
-
+    calcDisplayBalance(currentAccount.movements);
     //Display summary
+    calcDisplaySummary(currentAccount.movements);
   }
 }); //Now there are no errors if we type the username that does not exist
 
