@@ -74,7 +74,7 @@ const displayMovements = function (movements) {
       i + 1
     } ${type}</div>
           
-          <div class="movements__value">${mov}</div>
+          <div class="movements__value">${mov}€</div>
     </div>`;
     //to insert this HTML, we use this method insertAdjacentHTML:
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -87,9 +87,19 @@ displayMovements(account1.movements);
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   //to print value on screen:
-  labelBalance.textContent = `${balance} EUR`;
+  labelBalance.textContent = `${balance} €`;
 };
 calcDisplayBalance(account1.movements);
+
+//Calculating incomes and outcomes:
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  //putting insede html element:
+  labelSumIn.textContent = `${incomes} €`;
+};
+calcDisplaySummary(account1.movements);
 //Making usernames:
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
@@ -115,3 +125,9 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+const eurToUsd = 1.1;
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * eurToUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(totalDepositsUSD);
