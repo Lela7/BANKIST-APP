@@ -96,8 +96,14 @@ const calcDisplaySummary = function (movements) {
   const incomes = movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  //putting insede html element:
+  //putting inside html element:
   labelSumIn.textContent = `${incomes} €`;
+
+  const outcomes = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumOut.textContent = `${Math.abs(outcomes)}€`; //Math.abs() to remove sign(-)
 };
 calcDisplaySummary(account1.movements);
 //Making usernames:
@@ -125,9 +131,3 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
-const eurToUsd = 1.1;
-const totalDepositsUSD = movements
-  .filter(mov => mov > 0)
-  .map(mov => mov * eurToUsd)
-  .reduce((acc, mov) => acc + mov, 0);
-console.log(totalDepositsUSD);
