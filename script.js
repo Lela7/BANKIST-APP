@@ -142,6 +142,17 @@ btnLogin.addEventListener('click', function (e) {
   //using optional chaining for checking if the currentAccount exists (?)
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     console.log('LOGIN'); //just for checking
+    //Dipslay UI and welcome message:
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    //to display UI we have to set opacity to 0 in our CSS file,then to change it here to 100;
+    containerApp.style.opacity = 100;
+    //Display movements
+
+    //Dipslay balance
+
+    //Display summary
   }
 }); //Now there are no errors if we type the username that does not exist
 

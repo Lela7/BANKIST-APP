@@ -94,7 +94,7 @@ nav {
   gap: 2rem;
 
   /* NOTE This creates the fade in/out anumation */
-  /* opacity: 0; */ /*when opacity is set to 0, we can't see our application, so we set it to 100 (default)or to comment that */
+  opacity: 0; /*when opacity is set to 0, we can't see our application, so we set it to 100 (default)or to comment that */
   /* logging in and out is changing the opacity of our app! */
   transition: all 1s;
 }
