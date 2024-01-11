@@ -148,6 +148,8 @@ btnLogin.addEventListener('click', function (e) {
     containerApp.style.opacity = 100;
     //Clear the input fields:
     inputLoginUsername.value = inputLoginPin.value = '';
+    //to make the cursor invisible:
+    inputLoginPin.blur();
 
     //Display movements
     displayMovements(currentAccount.movements);
