@@ -146,6 +146,9 @@ btnLogin.addEventListener('click', function (e) {
     }`;
     //to display UI we have to set opacity to 0 in our CSS file,then to change it here to 100;
     containerApp.style.opacity = 100;
+    //Clear the input fields:
+    inputLoginUsername.value = inputLoginPin.value = '';
+
     //Display movements
     displayMovements(currentAccount.movements);
     //Dipslay balance
