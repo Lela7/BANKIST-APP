@@ -156,7 +156,7 @@ btnLogin.addEventListener('click', function (e) {
     //Dipslay balance
     calcDisplayBalance(currentAccount.movements);
     //Display summary
-    calcDisplaySummary(currentAccount);
+    calcDisplaySummary(currentAccount); //This is changed
   }
 }); //Now there are no errors if we type the username that does not exist
 
