@@ -108,7 +108,7 @@ const calcDisplaySummary = function (acc) {
     .filter(mov => mov > 0)
     .map(deposit => (deposit * acc.interestRate) / 100)
     .filter((int, i, arr) => {
-      console.log(arr);
+      //console.log(arr);
       return int >= 1; // we want anly interests that are >=1
     })
     .reduce((acc, int) => acc + int, 0);
@@ -127,6 +127,15 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
+//Refactored function can be called anywhere from the code:
+const updateUI = function (acc) {
+  //Display movements
+  displayMovements(acc.movements);
+  //Dipslay balance
+  calcDisplayBalance(acc);
+  //Display summary
+  calcDisplaySummary(acc);
+};
 //Event handler
 let currentAccount;
 
@@ -140,7 +149,7 @@ btnLogin.addEventListener('click', function (e) {
   //to check if the pin is correct
   //using optional chaining for checking if the currentAccount exists (?)
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
-    console.log('LOGIN'); //just for checking
+    //console.log('LOGIN'); //just for checking
     //Dipslay UI and welcome message:
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
@@ -151,13 +160,8 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     //to make the cursor invisible:
     inputLoginPin.blur();
-
-    //Display movements
-    displayMovements(currentAccount.movements);
-    //Dipslay balance
-    calcDisplayBalance(currentAccount);
-    //Display summary
-    calcDisplaySummary(currentAccount);
+    //Update UI:
+    updateUI(currentAccount);
   }
 });
 //Transfering money to the other account:
@@ -167,8 +171,10 @@ btnTransfer.addEventListener('click', function (e) {
   const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   ); //jd, js, ...
-  console.log(amount, receiverAcc);
-
+  //cleraing the input fields:
+  inputTransferAmount.value = inputTransferTo.value = '';
+  //to make the cursor invisible:
+  inputTransferAmount.blur();
   //check the current user has enough money for transfering
   if (
     amount > 0 &&
@@ -179,6 +185,9 @@ btnTransfer.addEventListener('click', function (e) {
     //Doing the transfer:
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
+
+    //Update UI:
+    updateUI(currentAccount);
   }
 });
 /////////////////////////
