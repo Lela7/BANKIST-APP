@@ -156,10 +156,18 @@ btnLogin.addEventListener('click', function (e) {
     //Dipslay balance
     calcDisplayBalance(currentAccount.movements);
     //Display summary
-    calcDisplaySummary(currentAccount); //This is changed
+    calcDisplaySummary(currentAccount);
   }
-}); //Now there are no errors if we type the username that does not exist
-
+});
+//Transfering money to the other account:
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault(); //to prevent reloading the page
+  const amount = Number(inputTransferAmount.value); //
+  const receiverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  ); //jd, js, ...
+  console.log(amount, receiverAcc);
+});
 /////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
