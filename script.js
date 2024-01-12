@@ -194,7 +194,6 @@ btnTransfer.addEventListener('click', function (e) {
 //Closing account:
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
-  //To make the fields invisible:
 
   if (
     currentAccount.username === inputCloseUsername.value &&
@@ -211,7 +210,7 @@ btnClose.addEventListener('click', function (e) {
     //Hide UI:
     containerApp.style.opacity = 0;
   }
-
+  //To make the fields invisible:
   inputCloseUsername.value = inputClosePin.value = ' ';
 });
 /////////////////////////
