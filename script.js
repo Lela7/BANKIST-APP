@@ -83,10 +83,11 @@ const displayMovements = function (movements) {
 };
 
 //Calculating balance:
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+
   //to print value on screen:
-  labelBalance.textContent = `${balance} €`;
+  labelBalance.textContent = `${acc.balance} €`;
 };
 
 //Calculating incomes and outcomes:
@@ -154,7 +155,7 @@ btnLogin.addEventListener('click', function (e) {
     //Display movements
     displayMovements(currentAccount.movements);
     //Dipslay balance
-    calcDisplayBalance(currentAccount.movements);
+    calcDisplayBalance(currentAccount);
     //Display summary
     calcDisplaySummary(currentAccount);
   }
@@ -167,6 +168,16 @@ btnTransfer.addEventListener('click', function (e) {
     acc => acc.username === inputTransferTo.value
   ); //jd, js, ...
   console.log(amount, receiverAcc);
+
+  //check the current user has enough money for transfering
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAccount.balance >= amount &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    console.log(`Transfer valid!`);
+  }
 });
 /////////////////////////
 /////////////////////////////////////////////////
