@@ -228,10 +228,11 @@ btnClose.addEventListener('click', function (e) {
   //To make the fields invisible:
   inputCloseUsername.value = inputClosePin.value = ' ';
 });
-
+let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
-  displayMovements(currentAccount.movements, true);
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted; //flipping the variable
 });
 /////////////////////////
 /////////////////////////////////////////////////
