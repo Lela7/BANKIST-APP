@@ -61,12 +61,14 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   //to empty container and start adding only new elements:
   containerMovements.innerHTML = '';
   //.textContent=0; //similar things
+  //to create a copy use slice() method
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
   //////////////////////////////////
-  movements.forEach(function (mov, i) {
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
     <div class="movements__row">
@@ -225,6 +227,11 @@ btnClose.addEventListener('click', function (e) {
   }
   //To make the fields invisible:
   inputCloseUsername.value = inputClosePin.value = ' ';
+});
+
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, true);
 });
 /////////////////////////
 /////////////////////////////////////////////////
