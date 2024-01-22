@@ -163,7 +163,7 @@ btnLogin.addEventListener('click', function (e) {
   //console.log(currentAccount);
   //to check if the pin is correct
   //using optional chaining for checking if the currentAccount exists (?)
-  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+  if (currentAccount?.pin === +inputLoginPin.value) {
     //console.log('LOGIN'); //just for checking
     //Dipslay UI and welcome message:
     labelWelcome.textContent = `Welcome back, ${
@@ -182,7 +182,7 @@ btnLogin.addEventListener('click', function (e) {
 //Transfering money to the other account:
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault(); //to prevent reloading the page
-  const amount = Number(inputTransferAmount.value); //
+  const amount = +inputTransferAmount.value; //
   const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   ); //jd, js, ...
@@ -209,7 +209,7 @@ btnTransfer.addEventListener('click', function (e) {
 //Requesting loan:
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = Number(inputLoanAmount.value);
+  const amount = +inputLoanAmount.value;
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     //Add movement to current account:
     currentAccount.movements.push(amount);
@@ -225,7 +225,7 @@ btnClose.addEventListener('click', function (e) {
 
   if (
     currentAccount.username === inputCloseUsername.value &&
-    currentAccount.pin === Number(inputClosePin.value)
+    currentAccount.pin === +inputClosePin.value
   ) {
     //console.log('Delete');
     const index = accounts.findIndex(
