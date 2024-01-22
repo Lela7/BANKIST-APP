@@ -151,8 +151,13 @@ const updateUI = function (acc) {
   //Display summary
   calcDisplaySummary(acc);
 };
-//Event handler
+//Event handlers
 let currentAccount;
+
+//FAKE ALWAYS LOGGED IN
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.opacity = 100;
 
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault(); //to prevent  form from submitting
@@ -259,6 +264,3 @@ labelBalance.addEventListener('click', function () {
 /////////////////////////////////////////////////
 
 /////////////////////////////////////////////////
-const randomInt = (min, max) =>
-  Math.trunc(Math.random() * (max - min) + 1) + min;
-console.log(randomInt(10, 20));
