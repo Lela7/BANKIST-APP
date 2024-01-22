@@ -171,8 +171,8 @@ const now = new Date();
 const day = `${now.getDate()}`.padStart(2, 0);
 const month = `${now.getMonth() + 1}`.padStart(2, 0);
 const year = now.getFullYear();
-const hour = now.getHours();
-const minutes = now.getMinutes();
+const hour = `${now.getHours()}`.padStart(2, 0);
+const minutes = `${now.getMinutes()}`.padStart(2, 0);
 labelDate.textContent = `${day}/${month}/${year}, ${hour}:${minutes}`;
 // day/month/year
 
@@ -193,12 +193,12 @@ btnLogin.addEventListener('click', function (e) {
     }`;
     //to display UI we have to set opacity to 0 in our CSS file,then to change it here to 100;
     containerApp.style.opacity = 100;
-    //Creating current date and time
-    const date = new Date(acc.movementsDates[i]);
-    const day = `${date.getDate()}`.padStart(2, 0);
-    const month = `${date.getMonth() + 1}`.padStart(2, 0);
-    const year = date.getFullYear();
-    const displayDate = `${day}/${month}/${year}`;
+    // //Creating current date and time
+    // const date = new Date(acc.movementsDates[i]);
+    // const day = `${date.getDate()}`.padStart(2, 0);
+    // const month = `${date.getMonth() + 1}`.padStart(2, 0);
+    // const year = date.getFullYear();
+    // const displayDate = `${day}/${month}/${year}`;
 
     //Clear the input fields:
     inputLoginUsername.value = inputLoginPin.value = '';
@@ -230,6 +230,9 @@ btnTransfer.addEventListener('click', function (e) {
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
 
+    //Adding transfer date:
+    currentAccount.movementsDates.push(new Date().toISOString());
+    receiverAcc.movementsDates.push(new Date().toISOString());
     //Update UI:
     updateUI(currentAccount);
   }
@@ -242,6 +245,8 @@ btnLoan.addEventListener('click', function (e) {
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     //Add movement to current account:
     currentAccount.movements.push(amount);
+    //Adding loan date:
+    currentAccount.movementsDates.push(new Date().toISOString());
     //Update UI:
     updateUI(currentAccount);
   }
