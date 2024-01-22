@@ -209,7 +209,7 @@ btnTransfer.addEventListener('click', function (e) {
 //Requesting loan:
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = +inputLoanAmount.value;
+  const amount = Math.floor(inputLoanAmount.value); //rounding using Math.floor()
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     //Add movement to current account:
     currentAccount.movements.push(amount);
@@ -251,3 +251,6 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 
 /////////////////////////////////////////////////
+const randomInt = (min, max) =>
+  Math.trunc(Math.random() * (max - min) + 1) + min;
+console.log(randomInt(10, 20));
