@@ -193,6 +193,13 @@ btnLogin.addEventListener('click', function (e) {
     }`;
     //to display UI we have to set opacity to 0 in our CSS file,then to change it here to 100;
     containerApp.style.opacity = 100;
+    //Creating current date and time
+    const date = new Date(acc.movementsDates[i]);
+    const day = `${date.getDate()}`.padStart(2, 0);
+    const month = `${date.getMonth() + 1}`.padStart(2, 0);
+    const year = date.getFullYear();
+    const displayDate = `${day}/${month}/${year}`;
+
     //Clear the input fields:
     inputLoginUsername.value = inputLoginPin.value = '';
     //to make the cursor invisible:
