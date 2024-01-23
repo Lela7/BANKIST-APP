@@ -73,7 +73,17 @@ const inputTransferAmount = document.querySelector('.form__input--amount');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
+//Functions
 
+const formatMovementDate = function (date) {
+  const calcDaysPassed = (date1, date2) =>
+    Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+
+  const day = `${date.getDate()}`.padStart(2, 0);
+  const month = `${date.getMonth() + 1}`.padStart(2, 0);
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};
 const displayMovements = function (acc, sort = false) {
   //to empty container and start adding only new elements:
   containerMovements.innerHTML = '';
@@ -85,12 +95,8 @@ const displayMovements = function (acc, sort = false) {
   //////////////////////////////////
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
-
     const date = new Date(acc.movementsDates[i]);
-    const day = `${date.getDate()}`.padStart(2, 0);
-    const month = `${date.getMonth() + 1}`.padStart(2, 0);
-    const year = date.getFullYear();
-    const displayDate = `${day}/${month}/${year}`;
+    const displayDate = formatMovementDate(date);
     const html = `
     <div class="movements__row">
           <div class="movements__type movements__type--${type}">${
@@ -281,15 +287,25 @@ btnSort.addEventListener('click', function (e) {
   displayMovements(currentAccount.movements, !sorted);
   sorted = !sorted; //flipping the variable
 });
-//coloring rows using remainder operator:
-labelBalance.addEventListener('click', function () {
-  [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
-    if (i % 2 === 0) row.style.backgroundColor = 'orangered'; //0,2,4,6
-    if (i % 3 === 0) row.style.backgroundColor = 'blue'; //0,3,6,9
-  });
-});
+// //coloring rows using remainder operator:
+// labelBalance.addEventListener('click', function () {
+//   [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
+//     if (i % 2 === 0) row.style.backgroundColor = 'orangered'; //0,2,4,6
+//     if (i % 3 === 0) row.style.backgroundColor = 'blue'; //0,3,6,9
+//   });
+// });
 
 /////////////////////////
 /////////////////////////////////////////////////
 
 /////////////////////////////////////////////////
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(Number(future));
+console.log(+future);
+
+//Calculating days between two dates:
+const calcDaysPassed = (date1, date2) =>
+  Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+
+const days1 = calcDaysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14));
+console.log(days1);
