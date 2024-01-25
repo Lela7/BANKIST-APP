@@ -181,15 +181,6 @@ currentAccount = account1;
 updateUI(currentAccount);
 containerApp.style.opacity = 100;
 
-const now = new Date();
-const day = `${now.getDate()}`.padStart(2, 0);
-const month = `${now.getMonth() + 1}`.padStart(2, 0);
-const year = now.getFullYear();
-const hour = `${now.getHours()}`.padStart(2, 0);
-const minutes = `${now.getMinutes()}`.padStart(2, 0);
-labelDate.textContent = `${day}/${month}/${year}, ${hour}:${minutes}`;
-// day/month/year
-
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault(); //to prevent  form from submitting
   // console.log('LOGIN');
@@ -207,12 +198,15 @@ btnLogin.addEventListener('click', function (e) {
     }`;
     //to display UI we have to set opacity to 0 in our CSS file,then to change it here to 100;
     containerApp.style.opacity = 100;
-    // //Creating current date and time
-    // const date = new Date(acc.movementsDates[i]);
-    // const day = `${date.getDate()}`.padStart(2, 0);
-    // const month = `${date.getMonth() + 1}`.padStart(2, 0);
-    // const year = date.getFullYear();
-    // const displayDate = `${day}/${month}/${year}`;
+    //Create current date and time
+    const now = new Date();
+    const day = `${now.getDate()}`.padStart(2, 0);
+    const month = `${now.getMonth() + 1}`.padStart(2, 0);
+    const year = now.getFullYear();
+    const hour = `${now.getHours()}`.padStart(2, 0);
+    const minutes = `${now.getMinutes()}`.padStart(2, 0);
+    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${minutes}`;
+    // day/month/year
 
     //Clear the input fields:
     inputLoginUsername.value = inputLoginPin.value = '';
