@@ -205,15 +205,17 @@ btnLogin.addEventListener('click', function (e) {
       hour: 'numeric',
       minute: 'numeric',
       day: 'numeric',
-      month: 'long', //'numeric' or '2-digit'
+      month: 'numeric', //'numeric' or '2-digit'
       year: 'numeric',
-      weekday: 'long', //'short','narrow'
+      // weekday: 'long', //'short','narrow'
     };
-    const locale = navigator.language;
-    console.log(locale);
-    labelDate.textContent = new Intl.DateTimeFormat('en-US', options).format(
-      now
-    );
+    // const locale = navigator.language;
+    // console.log(locale);
+
+    labelDate.textContent = new Intl.DateTimeFormat(
+      currentAccount.locale,
+      options
+    ).format(now);
     // const now = new Date();
     // const day = `${now.getDate()}`.padStart(2, 0);
     // const month = `${now.getMonth() + 1}`.padStart(2, 0);
