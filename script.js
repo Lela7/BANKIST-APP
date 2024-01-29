@@ -191,7 +191,7 @@ const startLogOutTimer = function () {
     time--;
   };
   //Set time to 5 minutes
-  let time = 30;
+  let time = 120;
   //Call the timer every second
   tick();
   const timer = setInterval(tick, 1000);
@@ -290,6 +290,10 @@ btnTransfer.addEventListener('click', function (e) {
     receiverAcc.movementsDates.push(new Date().toISOString());
     //Update UI:
     updateUI(currentAccount);
+
+    //Reset timer
+    clearInterval(timer);
+    timer = startLogOutTimer();
   }
 });
 
@@ -305,6 +309,10 @@ btnLoan.addEventListener('click', function (e) {
       currentAccount.movementsDates.push(new Date().toISOString());
       //Update UI:
       updateUI(currentAccount);
+
+      //Reset timer
+      clearInterval(timer);
+      timer = startLogOutTimer();
     }, 2500);
   }
   //clear input field:
