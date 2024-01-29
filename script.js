@@ -195,10 +195,12 @@ const startLogOutTimer = function () {
   //Call the timer every second
   tick();
   const timer = setInterval(tick, 1000);
+
+  return timer;
 };
 
 //Event handlers
-let currentAccount;
+let currentAccount, timer;
 
 //FAKE ALWAYS LOGGED IN
 // currentAccount = account1;
@@ -253,7 +255,10 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     //to make the cursor invisible:
     inputLoginPin.blur();
-    startLogOutTimer();
+
+    //Timer
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
     //Update UI:
     updateUI(currentAccount);
   }
