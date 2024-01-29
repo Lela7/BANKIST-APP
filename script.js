@@ -178,7 +178,7 @@ const startLogOutTimer = function () {
   //Set time to 5 minutes
   let time = 120;
   //Call the timer every second
-  setInterval(function () {
+  const timer = setInterval(function () {
     const min = String(Math.trunc(time / 60)).padStart(2, 0);
     const sec = String(Math.trunc(time % 60)).padStart(2, 0);
     //In each callback call, print the remaining time to UI
@@ -187,6 +187,11 @@ const startLogOutTimer = function () {
     //Decrese 1s
     time--;
     //When the time is at 0 seconds, stop timer and log out user
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = `Log in to get started`;
+      containerApp.style.opacity = 0;
+    }
   }, 1000);
 };
 
@@ -194,9 +199,9 @@ const startLogOutTimer = function () {
 let currentAccount;
 
 //FAKE ALWAYS LOGGED IN
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 100;
 
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault(); //to prevent  form from submitting
