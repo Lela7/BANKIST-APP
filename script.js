@@ -144,14 +144,17 @@ const calcDisplaySummary = function (acc) {
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
   //putting inside html element:
-  labelSumIn.textContent = `${incomes.toFixed(2)} €`;
+  labelSumIn.textContent = formatCur(incomes, acc.locale, acc.currency);
 
   const outcomes = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
 
-  labelSumOut.textContent = `${Math.abs(outcomes).toFixed(2)}€`; //Math.abs() to remove sign(-)
-
+  labelSumOut.textContent = formatCur(
+    Math.abs(outcomes),
+    acc.locale,
+    acc.currency
+  );
   const interest = acc.movements
     .filter(mov => mov > 0)
     .map(deposit => (deposit * acc.interestRate) / 100)
@@ -160,7 +163,7 @@ const calcDisplaySummary = function (acc) {
       return int >= 1; // we want anly interests that are >=1
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}`;
+  labelSumInterest.textContent = formatCur(interest, acc.locale, acc.currency);
 };
 
 //Making usernames:
