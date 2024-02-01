@@ -93,6 +93,13 @@ const formatMovementDate = function (date, locale) {
     return new Intl.DateTimeFormat(locale).format(date);
   }
 };
+//reusable function:
+const formatCur = function (value, locale, currency) {
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: currency,
+  }).format(value);
+};
 const displayMovements = function (acc, sort = false) {
   //to empty container and start adding only new elements:
   containerMovements.innerHTML = '';
@@ -107,10 +114,7 @@ const displayMovements = function (acc, sort = false) {
     const date = new Date(acc.movementsDates[i]);
     const displayDate = formatMovementDate(date, acc.locale);
 
-    const formattedMov = new Intl.NumberFormat(acc.locale, {
-      style: 'currency',
-      currency: acc.currency,
-    }).format(mov);
+    const formattedMov = formatCur(mov, acc.locale, acc.currency);
 
     const html = `
     <div class="movements__row">
@@ -131,7 +135,7 @@ const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
 
   //to print value on screen:
-  labelBalance.textContent = `${acc.balance.toFixed(2)} €`;
+  labelBalance.textContent = formatCur(acc.balance, acc.locale, acc.currency);
 };
 
 //Calculating incomes and outcomes:
